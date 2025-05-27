@@ -3,83 +3,427 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Cá Nhân</title>
+    <title>Profile - Nguyễn Văn A</title>
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
-            background-color: #000;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            box-sizing: border-box;
         }
-        .profile-container {
-            max-width: 400px;
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
             padding: 20px;
-            border: 2px solid #fff;
-            border-radius: 10px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
             text-align: center;
-            background-color: #1a1a1a;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
         }
-        .avatar {
-            width: 100px;
-            height: 100px;
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
-            margin: 10px auto;
-            border: 2px solid #fff;
-            object-fit: cover;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            margin: 0 auto 20px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: white;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
         }
-        .profile-container h1 {
-            font-size: 1.8em;
+
+        .profile-img:hover {
+            transform: scale(1.1);
+        }
+
+        .name {
+            font-size: 2.5em;
+            font-weight: 300;
             margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
         }
-        .profile-container p {
-            font-size: 0.9em;
+
+        .title {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            padding: 40px;
+        }
+
+        .sidebar {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            height: fit-content;
+        }
+
+        .main-content {
+            padding: 0 20px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #333;
             margin-bottom: 20px;
-            line-height: 1.5;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            position: relative;
         }
-        .social-icons {
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #764ba2;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            color: #667eea;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .skill-tag {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .experience-item {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid #667eea;
+            transition: transform 0.3s ease;
+        }
+
+        .experience-item:hover {
+            transform: translateX(10px);
+        }
+
+        .experience-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .experience-company {
+            color: #667eea;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .experience-date {
+            color: #888;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .experience-desc {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .contact-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .social-links {
             display: flex;
             justify-content: center;
             gap: 15px;
+            margin-top: 20px;
         }
-        .social-icons a {
-            color: #fff;
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
             text-decoration: none;
-            font-size: 1.5em;
-            transition: transform 0.3s, color 0.3s;
+            transition: transform 0.3s ease;
         }
-        .social-icons a:hover {
-            color: #1e90ff;
-            transform: scale(1.2);
+
+        .social-link:hover {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 20px;
+            }
+            
+            .header {
+                padding: 40px 20px;
+            }
+            
+            .name {
+                font-size: 2em;
+            }
+            
+            .profile-img {
+                width: 120px;
+                height: 120px;
+                font-size: 50px;
+            }
         }
     </style>
-    <!-- Thư viện Font Awesome -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="profile-container">
-        <img src="https://via.placeholder.com/100" alt="Avatar của bạn" class="avatar">
-        <h1>Chả có gì đâu.</h1>
-        <p>Chào mừng đến với trang cá nhân của tôi! Tôi là một nhà phát triển web, yêu thích công nghệ và khám phá điều mới.</p>
-        <div class="social-icons">
-            <a href="https://facebook.com" target="_blank" title="Facebook">
-                <i class="fab fa-facebook-square"></i>
-            </a>
-            <a href="https://twitter.com" target="_blank" title="Twitter">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a href="https://github.com" target="_blank" title="GitHub">
-                <i class="fab fa-github"></i>
-            </a>
-            <a href="https://linkedin.com" target="_blank" title="LinkedIn">
-                <i class="fab fa-linkedin"></i>
-            </a>
+    <div class="container">
+        <div class="header">
+            <div class="profile-img">👨‍💻</div>
+            <h1 class="name">Nguyễn Văn A</h1>
+            <p class="title">Full Stack Developer</p>
+        </div>
+
+        <div class="content">
+            <div class="sidebar">
+                <div class="section">
+                    <h3 class="section-title">Thông tin cá nhân</h3>
+                    <div class="info-item">
+                        <span class="info-icon">📧</span>
+                        <span>nguyenvana@email.com</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">📱</span>
+                        <span>+84 123 456 789</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">📍</span>
+                        <span>Hà Nội, Việt Nam</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">🎂</span>
+                        <span>25 tuổi</span>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3 class="section-title">Kỹ năng</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">HTML/CSS</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">Git</span>
+                    </div>
+                </div>
+
+                <button class="contact-btn">Liên hệ với tôi</button>
+                
+                <div class="social-links">
+                    <a href="#" class="social-link">📘</a>
+                    <a href="#" class="social-link">🐙</a>
+                    <a href="#" class="social-link">💼</a>
+                    <a href="#" class="social-link">📷</a>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div class="section">
+                    <h2 class="section-title">Giới thiệu</h2>
+                    <p style="line-height: 1.8; color: #666; font-size: 1.1em;">
+                        Tôi là một Full Stack Developer với hơn 3 năm kinh nghiệm trong việc phát triển 
+                        các ứng dụng web hiện đại. Đam mê công nghệ và luôn học hỏi những xu hướng mới 
+                        trong ngành lập trình. Có khả năng làm việc độc lập cũng như làm việc nhóm hiệu quả.
+                    </p>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Kinh nghiệm làm việc</h2>
+                    
+                    <div class="experience-item">
+                        <div class="experience-title">Senior Full Stack Developer</div>
+                        <div class="experience-company">ABC Technology Co., Ltd</div>
+                        <div class="experience-date">01/2022 - Hiện tại</div>
+                        <div class="experience-desc">
+                            Phát triển và duy trì các ứng dụng web quy mô lớn sử dụng React, Node.js và MongoDB. 
+                            Tham gia thiết kế kiến trúc hệ thống và tối ưu hóa hiệu suất ứng dụng.
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-title">Junior Full Stack Developer</div>
+                        <div class="experience-company">XYZ Software Solutions</div>
+                        <div class="experience-date">06/2020 - 12/2021</div>
+                        <div class="experience-desc">
+                            Phát triển các tính năng mới cho ứng dụng e-commerce, tối ưu hóa giao diện người dùng 
+                            và cải thiện trải nghiệm khách hàng. Làm việc với team để deliver các dự án đúng deadline.
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-title">Frontend Developer Intern</div>
+                        <div class="experience-company">StartUp Innovation Hub</div>
+                        <div class="experience-date">01/2020 - 05/2020</div>
+                        <div class="experience-desc">
+                            Học hỏi và phát triển các dự án frontend sử dụng HTML, CSS, JavaScript và React. 
+                            Tham gia các buổi training và mentoring từ senior developers.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Học vấn</h2>
+                    
+                    <div class="experience-item">
+                        <div class="experience-title">Cử nhân Công nghệ Thông tin</div>
+                        <div class="experience-company">Đại học Bách Khoa Hà Nội</div>
+                        <div class="experience-date">2016 - 2020</div>
+                        <div class="experience-desc">
+                            Tốt nghiệp loại Giỏi với chuyên ngành Kỹ thuật Phần mềm. 
+                            Tham gia nhiều dự án nhóm và các hoạt động ngoại khóa liên quan đến công nghệ.
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <script>
+        // Thêm hiệu ứng smooth scroll cho các liên kết
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Thêm hiệu ứng hover cho các thẻ skill
+        document.querySelectorAll('.skill-tag').forEach(tag => {
+            tag.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px) scale(1.05)';
+            });
+            
+            tag.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Thêm sự kiện click cho nút liên hệ
+        document.querySelector('.contact-btn').addEventListener('click', function() {
+            alert('Cảm ơn bạn đã quan tâm! Vui lòng liên hệ qua email: nguyenvana@email.com');
+        });
+    </script>
 </body>
-</html>
+                            </html>
