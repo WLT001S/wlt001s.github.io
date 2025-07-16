@@ -12,7 +12,7 @@
         
         if (code) {
             // Chuyển hướng đến bot server với code
-            window.location.href = `http://localhost:3000/auth/callback?code=${code}`;
+            window.location.href = `http://wlt001s-github-io.railway.internal/auth/callback?code=${code}`;
         } else {
             document.body.innerHTML = '<h1>Lỗi: Không tìm thấy authorization code</h1>';
         }
